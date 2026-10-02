@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ahmed Mahrous — Network Engineer × AI Specialist</title>
+<meta name="description" content="Interactive CV of Ahmed Ibrahim Mahrous — Network Engineer & AI Specialist.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&family=Noto+Naskh+Arabic:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#12100c;
+  --bg2:#1a1712;
+  --ink:#f0e7d8;
+  --ink-dim:#a89e8d;
+  --warm:#e8975a;
+  --warm-deep:#c96a3b;
+  --cool:#6fa7b3;
+  --cool-deep:#3e6f7a;
+  --gold:#d9b26a;
+  --line:rgba(240,231,216,.12);
+  --card:rgba(240,231,216,.035);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Inter',system-ui,sans-serif;
+  --mono:'JetBrains Mono',monospace;
+}
+html[lang="ar"] body{ --serif:'Noto Naskh Arabic',serif; --sans:'Noto Naskh Arabic','Inter',sans-serif; }
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-weight:300;
+  line-height:1.6;
+  overflow-x:hidden;
+}
+::selection{background:var(--warm);color:var(--bg)}
+
+/* ---------- cinematic layer ---------- */
+.grain{
+  position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.05;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 7s steps(6) infinite;
+}
+@keyframes grain{
+  0%,100%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}
+  40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-2%)}80%{transform:translate(3%,3%)}
+}
+.vignette{position:fixed;inset:0;pointer-events:none;z-index:59;
+  background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.55) 100%)}
+.letterbox{position:fixed;left:0;right:0;height:0;background:#000;z-index:58;transition:height .6s cubic-bezier(.7,0,.3,1)}
+.letterbox.top{top:0}.letterbox.bottom{bottom:0}
+body.cinema .letterbox{height:34px}
+
+/* ---------- nav ---------- */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:70;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 5vw;
+  background:linear-gradient(180deg,rgba(18,16,12,.92),rgba(18,16,12,0));
+  backdrop-filter:blur(2px);
+}
+.logo{font-family:var(--serif);font-size:1.25rem;letter-spacing:.12em;color:var(--gold)}
+.nav-right{display:flex;gap:12px;align-items:center}
+.lang-btn{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;
+  background:transparent;border:1px solid var(--line);color:var(--ink-dim);
+  padding:8px 18px;cursor:pointer;transition:all .35s;
+}
+.lang-btn:hover{border-color:var(--warm);color:var(--warm)}
+.lang-btn span{opacity:.4;transition:opacity .3s}
+.lang-btn .on{opacity:1;color:var(--warm)}
+.links-btn{
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;
+  background:transparent;border:1px solid var(--line);color:var(--ink-dim);
+  padding:8px 18px;cursor:pointer;transition:all .35s;text-decoration:none;display:inline-block;
+}
+.links-btn:hover{border-color:var(--cool);color:var(--cool)}
+
+/* ---------- hero ---------- */
+.hero{
+  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
+  padding:14vh 8vw 10vh;position:relative;
+}
+.hero-kicker{font-family:var(--mono);font-size:.75rem;letter-spacing:.4em;color:var(--cool);text-transform:uppercase;margin-bottom:3vh}
+.hero h1{
+  font-family:var(--serif);font-weight:500;
+  font-size:clamp(2.8rem,7.5vw,6.2rem);line-height:1.04;
+}
+.hero h1 .warm{color:var(--warm);font-style:italic}
+.hero h1 .cool{color:var(--cool);font-style:italic}
+.hero-sub{
+  margin-top:3.5vh;max-width:640px;font-size:clamp(.95rem,1.4vw,1.12rem);
+  color:var(--ink-dim);font-weight:300;
+}
+.hero-cta{display:flex;gap:16px;margin-top:5vh;flex-wrap:wrap}
+.btn{
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;
+  padding:14px 30px;text-decoration:none;transition:all .4s;position:relative;overflow:hidden;
+}
+.btn-warm{border:1px solid var(--warm);color:var(--warm)}
+.btn-warm:hover{background:var(--warm);color:var(--bg)}
+.btn-ghost{border:1px solid var(--line);color:var(--ink-dim)}
+.btn-ghost:hover{border-color:var(--cool);color:var(--cool)}
+.scroll-hint{
+  position:absolute;bottom:6vh;left:8vw;font-family:var(--mono);
+  font-size:.65rem;letter-spacing:.35em;color:var(--ink-dim);opacity:.6;
+  display:flex;align-items:center;gap:12px;
+}
+.scroll-hint::after{content:"";width:60px;height:1px;background:var(--ink-dim);animation:pulse-line 2.4s infinite}
+@keyframes pulse-line{0%,100%{opacity:.3}50%{opacity:1}}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .9s ease,transform .9s ease}
+.reveal.vis{opacity:1;transform:none}
+
+/* ---------- section chrome ---------- */
+section{padding:12vh 8vw;position:relative}
+.sec-head{display:flex;align-items:baseline;gap:24px;margin-bottom:7vh;flex-wrap:wrap}
+.sec-num{font-family:var(--mono);font-size:.72rem;color:var(--warm);letter-spacing:.3em}
+.sec-title{font-family:var(--serif);font-size:clamp(1.9rem,3.6vw,3rem);font-weight:500}
+.sec-title em{color:var(--cool)}
+.sec-rule{flex:1;height:1px;background:var(--line);min-width:80px;align-self:center}
+
+/* ---------- network map ---------- */
+#netmap-wrap{position:relative;border:1px solid var(--line);background:var(--bg2);overflow:hidden}
+#netmap{display:block;width:100%;height:480px}
+.netmap-hud{
+  position:absolute;top:16px;left:20px;font-family:var(--mono);
+  font-size:.62rem;letter-spacing:.22em;color:var(--cool);opacity:.75;line-height:1.9;
+}
+.netmap-hud b{color:var(--warm);font-weight:400}
+@media(max-width:720px){#netmap{height:400px}}
+
+/* ---------- terminal ---------- */
+.terminal{
+  background:#0b0a08;border:1px solid var(--line);max-width:860px;margin:0 auto;
+  box-shadow:0 30px 80px rgba(0,0,0,.5);
+}
+.term-bar{
+  display:flex;align-items:center;gap:8px;padding:12px 18px;
+  border-bottom:1px solid var(--line);background:rgba(240,231,216,.03);
+}
+.dot{width:10px;height:10px;border-radius:50%}
+.dot:nth-child(1){background:var(--warm-deep)}.dot:nth-child(2){background:var(--gold)}.dot:nth-child(3){background:var(--cool-deep)}
+.term-title{margin-left:auto;font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;color:var(--ink-dim)}
+.term-body{
+  padding:26px 24px;font-family:var(--mono);font-size:clamp(.72rem,1.6vw,.88rem);
+  line-height:1.9;min-height:340px;color:#c8d8cc;
+}
+.term-body .p{color:var(--warm)}
+.term-body .out{color:var(--ink-dim)}
+.term-body .ok{color:var(--cool)}
+.caret{display:inline-block;width:9px;height:1.1em;background:var(--warm);vertical-align:text-bottom;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+/* ---------- timeline ---------- */
+.timeline{position:relative;max-width:900px;margin:0 auto;padding-left:40px}
+html[dir="rtl"] .timeline{padding-left:0;padding-right:40px}
+.timeline::before{
+  content:"";position:absolute;left:8px;top:6px;bottom:6px;width:1px;
+  background:linear-gradient(180deg,var(--warm),var(--cool));
+}
+html[dir="rtl"] .timeline::before{left:auto;right:8px}
+.t-item{position:relative;padding:0 0 7vh 0}
+.t-item::before{
+  content:"";position:absolute;left:-40px;top:8px;width:13px;height:13px;border-radius:50%;
+  border:2px solid var(--warm);background:var(--bg);
+}
+html[dir="rtl"] .t-item::before{left:auto;right:-40px}
+.t-item:nth-child(even)::before{border-color:var(--cool)}
+.t-date{font-family:var(--mono);font-size:.68rem;letter-spacing:.24em;color:var(--warm);text-transform:uppercase}
+.t-item:nth-child(even) .t-date{color:var(--cool)}
+.t-role{font-family:var(--serif);font-size:1.7rem;font-weight:600;margin:6px 0 2px}
+.t-org{font-size:.85rem;color:var(--gold);letter-spacing:.06em;margin-bottom:12px}
+.t-desc{color:var(--ink-dim);font-size:.94rem;max-width:640px}
+.t-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.tag{
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;
+  border:1px solid var(--line);color:var(--ink-dim);padding:5px 12px;
+}
+
+/* ---------- AI section ---------- */
+.ai-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:2px;background:var(--line)}
+.ai-card{
+  background:var(--bg);padding:44px 34px;position:relative;overflow:hidden;
+  transition:background .5s;cursor:default;
+}
+.ai-card::after{
+  content:"";position:absolute;inset:0;opacity:0;transition:opacity .5s;
+  background:radial-gradient(600px circle at var(--mx,50%) var(--my,50%),rgba(232,151,90,.08),transparent 40%);
+}
+.ai-card:hover::after{opacity:1}
+.ai-card .k{font-family:var(--mono);font-size:.62rem;letter-spacing:.3em;color:var(--cool);margin-bottom:20px}
+.ai-card h3{font-family:var(--serif);font-size:1.5rem;font-weight:600;margin-bottom:14px}
+.ai-card p{color:var(--ink-dim);font-size:.9rem}
+.ai-card .glyph{
+  position:absolute;right:18px;top:18px;font-family:var(--mono);font-size:2rem;
+  color:rgba(240,231,216,.06);font-weight:300;
+}
+html[dir="rtl"] .ai-card .glyph{right:auto;left:18px}
+
+/* ---------- skills ---------- */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:40px}
+.sk-col h4{
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--warm);margin-bottom:22px;padding-bottom:12px;border-bottom:1px solid var(--line);
+}
+.sk-col:nth-child(2) h4{color:var(--cool)}
+.sk-col:nth-child(3) h4{color:var(--gold)}
+.sk-col ul{list-style:none}
+.sk-col li{
+  padding:9px 0;font-size:.92rem;color:var(--ink-dim);
+  border-bottom:1px dashed rgba(240,231,216,.06);transition:color .3s,padding-left .3s;
+}
+.sk-col li:hover{color:var(--ink);padding-left:8px}
+html[dir="rtl"] .sk-col li:hover{padding-left:0;padding-right:8px}
+
+/* ---------- beyond ---------- */
+#beyond{background:linear-gradient(160deg,var(--bg2),#161310)}
+.beyond-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px}
+.b-card{
+  border:1px solid var(--line);padding:36px 30px;background:var(--card);
+  transition:transform .5s,border-color .5s;
+}
+.b-card:hover{transform:translateY(-6px);border-color:var(--warm)}
+.b-card .b-ico{font-size:1.6rem;margin-bottom:16px;display:block}
+.b-card h4{font-family:var(--serif);font-size:1.25rem;font-weight:600;margin-bottom:8px}
+.b-card p{font-size:.85rem;color:var(--ink-dim)}
+
+/* ---------- footer / contact ---------- */
+footer{padding:14vh 8vw 8vh;text-align:center;border-top:1px solid var(--line)}
+footer h2{font-family:var(--serif);font-size:clamp(2rem,5vw,3.6rem);font-weight:500;margin-bottom:4vh}
+footer h2 em{color:var(--warm)}
+.contact-row{
+  display:flex;justify-content:center;gap:34px;flex-wrap:wrap;margin-bottom:6vh;
+  font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;color:var(--ink-dim);
+}
+.contact-row a{color:var(--cool);text-decoration:none;transition:color .3s}
+.contact-row a:hover{color:var(--warm)}
+.copyright{font-family:var(--mono);font-size:.62rem;letter-spacing:.3em;color:rgba(168,158,141,.4)}
+
+@media print{
+  nav,.grain,.vignette,.letterbox,.scroll-hint,.hero-cta{display:none}
+}
+@media(max-width:640px){
+  section{padding:10vh 6vw}
+  .hero{padding:16vh 6vw 10vh}
+  .contact-row{gap:18px}
+}
+</style>
+</head>
+<body class="cinema">
+
+<div class="letterbox top"></div><div class="letterbox bottom"></div>
+<div class="grain"></div><div class="vignette"></div>
+
+<nav>
+  <div class="logo">AIM<span style="color:var(--cool)">.</span></div>
+  <div class="nav-right">
+    <a class="links-btn" href="https://www.linkedin.com/in/ahmed-ibrahim-48ba401b9" target="_blank" rel="noopener">LINKEDIN</a>
+    <button class="lang-btn" id="langToggle" aria-label="Toggle language">
+      <span id="enLabel" class="on">EN</span> / <span id="arLabel">ع</span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <p class="hero-kicker reveal" data-en="A Film In One Scroll — Interactive CV" data-ar="فيلم في تمريرة واحدة — سيرة ذاتية تفاعلية">A Film In One Scroll — Interactive CV</p>
+  <h1 class="reveal">
+    <span data-en="Ahmed Mahrous" data-ar="أحمد محروس">Ahmed Mahrous</span><br>
+    <span class="warm" data-en="Network Engineer" data-ar="مهندس شبكات">Network Engineer</span>
+    <span style="color:var(--ink-dim);font-style:italic;font-size:.6em"> × </span>
+    <span class="cool" data-en="AI Specialist" data-ar="أخصائي ذكاء اصطناعي">AI Specialist</span>
+  </h1>
+  <p class="hero-sub reveal" data-en="I design, secure and build networks — then teach machines to create. Fortigate firewalls to generative video, data centers to AI-native full-stack development. An engineer with an artist's eye." data-ar="أصمّم وأؤمّن وأبني الشبكات — ثم أعلّم الآلات الإبداع. من جدران الحماية فورتيغيت إلى توليد الفيديو، من مراكز البيانات إلى تطوير متكامل قائم على الذكاء الاصطناعي. مهندس بعين فنّان.">I design, secure and build networks — then teach machines to create. Fortigate firewalls to generative video, data centers to AI-native full-stack development. An engineer with an artist's eye.</p>
+  <div class="hero-cta reveal">
+    <a class="btn btn-warm" href="https://www.linkedin.com/in/ahmed-ibrahim-48ba401b9" target="_blank" rel="noopener" data-en="Connect on LinkedIn" data-ar="تواصل عبر لينكدإن">Connect on LinkedIn</a>
+    <a class="btn btn-ghost" href="#netmap" data-en="Enter the Network ↓" data-ar="ادخل إلى الشبكة ↓">Enter the Network ↓</a>
+    <a class="btn btn-ghost" href="Ahmed-Mahrous-CV-OnePager.pdf" target="_blank" rel="noopener" data-en="CV as PDF ↓" data-ar="السيرة الذاتية PDF ↓">CV as PDF ↓</a>
+  </div>
+  <div class="scroll-hint" data-en="SCROLL" data-ar="مرّر">SCROLL</div>
+</header>
+
+<!-- NETWORK MAP -->
+<section id="netmap-sec">
+  <div class="sec-head reveal">
+    <span class="sec-num">01</span>
+    <h2 class="sec-title" data-en="The <em>Network</em> of My Career" data-ar="شبكة <em>مسيرتي</em> المهنية">The <em>Network</em> of My Career</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div id="netmap-wrap" class="reveal">
+    <canvas id="netmap"></canvas>
+    <div class="netmap-hud">
+      TOPOLOGY: CAREER.MAP<br>
+      CORE: <b>CAIRO PRODUCTION HOUSE</b><br>
+      NODES: 5 &nbsp;|&nbsp; LINKS: <span id="linkCount">0</span> &nbsp;|&nbsp; STATUS: <b>ONLINE</b>
+    </div>
+  </div>
+</section>
+
+<!-- TERMINAL -->
+<section id="terminal-sec">
+  <div class="sec-head reveal">
+    <span class="sec-num">02</span>
+    <h2 class="sec-title" data-en="$ whoami — <em>query the engineer</em>" data-ar="$ whoami — <em>استعلم عن المهندس</em>">$ whoami — <em>query the engineer</em></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="terminal reveal">
+    <div class="term-bar"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="term-title">ahmed@career: ~</span></div>
+    <div class="term-body" id="termBody"></div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="sec-head reveal">
+    <span class="sec-num">03</span>
+    <h2 class="sec-title" data-en="Feature <em>Timeline</em>" data-ar="الخط <em>الزمني</em>">Feature <em>Timeline</em></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="timeline">
+    <div class="t-item reveal">
+      <div class="t-date" data-en="2026 — Present" data-ar="2026 — الآن">2026 — Present</div>
+      <h3 class="t-role" data-en="Network Engineer / AI Specialist" data-ar="مهندس شبكات / أخصائي ذكاء اصطناعي">Network Engineer / AI Specialist</h3>
+      <div class="t-org" data-en="Cairo Production House" data-ar="كايرو برودكشن هاوس">Cairo Production House</div>
+      <p class="t-desc" data-en="All-in-one network ownership: Fortigate firewall security, LAN/WAN, NAS storage, Active Directory and endpoint management — while pioneering AI workflows: prompt engineering, generative video (Higgsfield, Magnific) and AI-native full-stack development (vibe coding, GCP, GitHub)." data-ar="إدارة شاملة للشبكة: أمن جدران الحماية فورتيغيت، الشبكات المحلية والواسعة، تخزين NAS، الدليل النشط وإدارة نقاط النهاية — مع قيادة سير عمل الذكاء الاصطناعي: هندسة الأوامر، توليد الفيديو (هيجزفيلد، ماغنيفيك) والتطوير المتكامل القائم على الذكاء الاصطناعي.">All-in-one network ownership: Fortigate firewall security, LAN/WAN, NAS storage, Active Directory and endpoint management — while pioneering AI workflows: prompt engineering, generative video (Higgsfield, Magnific) and AI-native full-stack development (vibe coding, GCP, GitHub).</p>
+      <div class="t-tags"><span class="tag">Fortigate</span><span class="tag">AD</span><span class="tag">NAS</span><span class="tag">Prompt Eng.</span><span class="tag">Gen Video</span><span class="tag">GCP</span></div>
+    </div>
+    <div class="t-item reveal">
+      <div class="t-date" data-en="2023 — 2024" data-ar="2023 — 2024">2023 — 2024</div>
+      <h3 class="t-role" data-en="Network Engineer — Data Center LAN" data-ar="مهندس شبكات — شبكات مركز البيانات">Network Engineer — Data Center LAN</h3>
+      <div class="t-org" data-en="NBE AL-Ahli — National Bank of Egypt" data-ar="البنك الأهلي المصري">NBE AL-Ahli — National Bank of Egypt</div>
+      <p class="t-desc" data-en="Data-center LAN support for ISE, configuring, installing and integrating ACI systems. New-installation team: WAN routing & switching, rolling out networks at new sites with ISPs over copper, fiber and microwave." data-ar="دعم شبكات مراكز البيانات لنظام ISE، وإعداد وتثبيت وأنظمة ACI. فريق التركيبات الجديدة: توجيه وتبديل الشبكات الواسعة، وتنفيذ الشبكات في المواقع الجديدة مع مقدمي الخدمة عبر النحاس والألياف والموجات الدقيقة.">Data-center LAN support for ISE, configuring, installing and integrating ACI systems. New-installation team: WAN routing & switching, rolling out networks at new sites with ISPs over copper, fiber and microwave.</p>
+      <div class="t-tags"><span class="tag">Cisco ACI</span><span class="tag">ISE</span><span class="tag">WAN</span><span class="tag">Routing</span><span class="tag">Fiber / Microwave</span></div>
+    </div>
+    <div class="t-item reveal">
+      <div class="t-date" data-en="2021" data-ar="2021">2021</div>
+      <h3 class="t-role" data-en="Marketing & Business Development Executive" data-ar="تنفيذي تسويق وتطوير أعمال">Marketing & Business Development Executive</h3>
+      <div class="t-org" data-en="Etegah Marketing & Media Production" data-ar="اتجاه للتسويق والإنتاج الإعلامي">Etegah Marketing & Media Production</div>
+      <p class="t-desc" data-en="Marketing campaigns, creative production and sales team leadership — where the storytelling instinct that now powers my AI video work was born." data-ar="حملات تسويقية وإنتاج إبداعي وقيادة فريق مبيعات — حيث وُلدت غريزة سرد القصص التي تشغّل اليوم عملي في فيديوهات الذكاء الاصطناعي.">Marketing campaigns, creative production and sales team leadership — where the storytelling instinct that now powers my AI video work was born.</p>
+      <div class="t-tags"><span class="tag">Campaigns</span><span class="tag">Creative Prod.</span><span class="tag">Sales</span></div>
+    </div>
+    <div class="t-item reveal">
+      <div class="t-date" data-en="2015 — 2016 · Summer" data-ar="2015 — 2016 · صيفي">2015 — 2016 · Summer</div>
+      <h3 class="t-role" data-en="Animation Team Lead" data-ar="قائد فريق الأنشطة">Animation Team Lead</h3>
+      <div class="t-org" data-en="FunMaker for Entertainment" data-ar="فان ميكر للترفيه">FunMaker for Entertainment</div>
+      <p class="t-desc" data-en="Leading sports activities, social events, sales & PR, live entertainment shows and acting — excellence in children's activities and linguistics from working with diverse audiences." data-ar="قيادة الأنشطة الرياضية والفعاليات الاجتماعية والمبيعات والعلاقات العامة وعروض الترفيه الحي والتمثيل — تميّز في أنشطة الأطفال واللغات من العمل مع جماهير متنوعة.">Leading sports activities, social events, sales & PR, live entertainment shows and acting — excellence in children's activities and linguistics from working with diverse audiences.</p>
+      <div class="t-tags"><span class="tag">Leadership</span><span class="tag">Live Shows</span><span class="tag">PR</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- AI SPECIALIST -->
+<section id="ai">
+  <div class="sec-head reveal">
+    <span class="sec-num">04</span>
+    <h2 class="sec-title" data-en="The <em>AI Specialist</em> Reel" data-ar="شريط <em>أخصائي الذكاء الاصطناعي</em>">The <em>AI Specialist</em> Reel</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="ai-grid reveal">
+    <div class="ai-card"><span class="glyph">01</span><div class="k" data-en="PROMPT ENGINEERING" data-ar="هندسة الأوامر">PROMPT ENGINEERING</div><h3 data-en="Directing Machines" data-ar="إخراج الآلات">Directing Machines</h3><p data-en="Crafting precise, production-grade prompts that turn raw models into reliable creative and technical tools." data-ar="صياغة أوامر دقيقة بمعايير الإنتاج تحوّل النماذج الخام إلى أدوات إبداعية وتقنية موثوقة.">Crafting precise, production-grade prompts that turn raw models into reliable creative and technical tools.</p></div>
+    <div class="ai-card"><span class="glyph">02</span><div class="k" data-en="GENERATIVE VIDEO" data-ar="توليد الفيديو">GENERATIVE VIDEO</div><h3 data-en="Cinema by AI" data-ar="سينما بالذكاء الاصطناعي">Cinema by AI</h3><p data-en="Video generation with Higgsfield & Magnific — cinematic frames, motion and upscaling for media production." data-ar="توليد الفيديو عبر Higgsfield وMagnific — لقطات سينمائية وحرود تصاعد للإنتاج الإعلامي.">Video generation with Higgsfield & Magnific — cinematic frames, motion and upscaling for media production.</p></div>
+    <div class="ai-card"><span class="glyph">03</span><div class="k" data-en="AI-NATIVE DEV" data-ar="تطوير قائم على الذكاء الاصطناعي">AI-NATIVE DEV</div><h3 data-en="Vibe Coding" data-ar="البرمجة الإبداعية">Vibe Coding</h3><p data-en="Full-stack development, AI-native: shipping real products fast with modern stacks, GCP and GitHub workflows." data-ar="تطوير متكامل قائم على الذكاء الاصطناعي: إطلاق منتجات حقيقية بسرعة باستخدام منصات حديثة وGCP وGitHub.">Full-stack development, AI-native: shipping real products fast with modern stacks, GCP and GitHub workflows.</p></div>
+    <div class="ai-card"><span class="glyph">04</span><div class="k" data-en="INFRA × AI" data-ar="بنية × ذكاء">INFRA × AI</div><h3 data-en="Two Worlds, One Engineer" data-ar="عالمان، مهندس واحد">Two Worlds, One Engineer</h3><p data-en="Rare blend: enterprise network security and data-center operations fused with cutting-edge generative AI." data-ar="مزيج نادر: أمن الشبكات المؤسسية وعمليات مراكز البيانات مدموجة بأحدث تقنيات الذكاء الاصطناعي التوليدي.">Rare blend: enterprise network security and data-center operations fused with cutting-edge generative AI.</p></div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="sec-head reveal">
+    <span class="sec-num">05</span>
+    <h2 class="sec-title" data-en="Production <em>Credits</em>" data-ar="أعمال <em>الإنتاج</em>">Production <em>Credits</em></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="skills-grid reveal">
+    <div class="sk-col">
+      <h4 data-en="Network & Security" data-ar="الشبكات والأمن">Network & Security</h4>
+      <ul>
+        <li data-en="Fortigate Firewall — NSE4" data-ar="جدار الحماية فورتيغيت — NSE4">Fortigate Firewall — NSE4</li>
+        <li data-en="LAN / WAN · Routing & Switching" data-ar="شبكات محلية وواسعة · توجيه وتبديل">LAN / WAN · Routing & Switching</li>
+        <li data-en="Cisco ACI · ISE · SD-Access" data-ar="Cisco ACI · ISE · SD-Access">Cisco ACI · ISE · SD-Access</li>
+        <li data-en="Active Directory · NAS Storage" data-ar="الدليل النشط · تخزين NAS">Active Directory · NAS Storage</li>
+        <li data-en="CCNA · CompTIA A+ / N+" data-ar="CCNA · CompTIA A+ / N+">CCNA · CompTIA A+ / N+</li>
+      </ul>
+    </div>
+    <div class="sk-col">
+      <h4 data-en="AI & Development" data-ar="الذكاء الاصطناعي والتطوير">AI & Development</h4>
+      <ul>
+        <li data-en="Prompt Engineering" data-ar="هندسة الأوامر">Prompt Engineering</li>
+        <li data-en="Generative Video — Higgsfield / Magnific" data-ar="فيديو توليدي — Higgsfield / Magnific">Generative Video — Higgsfield / Magnific</li>
+        <li data-en="AI-Native Full-Stack · Vibe Coding" data-ar="تطوير متكامل قائم على الذكاء الاصطناعي">AI-Native Full-Stack · Vibe Coding</li>
+        <li data-en="Python · HTML / CSS / JS · PHP · SQL" data-ar="Python · HTML / CSS / JS · PHP · SQL">Python · HTML / CSS / JS · PHP · SQL</li>
+        <li data-en="GCP · GitHub" data-ar="GCP · GitHub">GCP · GitHub</li>
+      </ul>
+    </div>
+    <div class="sk-col">
+      <h4 data-en="Education & Projects" data-ar="التعليم والمشاريع">Education & Projects</h4>
+      <ul>
+        <li data-en="B.Eng — Communication & Electronics, MSA University" data-ar="بكالوريوس هندسة — اتصالات وإلكترونيات، جامعة MSA">B.Eng — Communication & Electronics, MSA University</li>
+        <li data-en="AMIT Embedded Systems Diploma — 2020" data-ar="دبلوم الأنظمة المدمجة AMIT — 2020">AMIT Embedded Systems Diploma — 2020</li>
+        <li data-en="IGCSE — PortSaid British School, Zamalek" data-ar="شهادة IGCSE — المدرسة البريطانية ببورسعيد، الزمالك">IGCSE — PortSaid British School, Zamalek</li>
+        <li data-en="Graduation Project — Grade A: IoT Vehicle Accident Detector & Rescue System" data-ar="مشروع التخرج — بتقدير ممتاز: نظام إنترنت الأشياء لرصد حوادث السيارات والإنقاذ">Graduation Project — Grade A: IoT Vehicle Accident Detector & Rescue System</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- BEYOND TECH -->
+<section id="beyond">
+  <div class="sec-head reveal">
+    <span class="sec-num">06</span>
+    <h2 class="sec-title" data-en="The <em>Director's Cut</em>" data-ar="النسخة <em>الإخراجية</em>">The <em>Director's Cut</em></h2>
+    <div class="sec-rule"></div>
+  </div>
+  <p class="t-desc reveal" style="max-width:640px;margin-bottom:6vh" data-en="Every engineer has a spec sheet. Few have a story. Workshops in art-making, acting, script writing, filmmaking and theatre — plus music, and a semi-professional football career at U20 level." data-ar="لكل مهندس مواصفات تقنية. لكن القليلين منهم يملكون حكاية. ورش فنون وتشكيل وتمثيل وكتابة سيناريو وصناعة أفلام ومسرح — إضافة إلى الموسيقى ومسيرة كرة قدم شبه احترافية حتى فئة تحت 20 عامًا.">Every engineer has a spec sheet. Few have a story. Workshops in art-making, acting, script writing, filmmaking and theatre — plus music, and a semi-professional football career at U20 level.</p>
+  <div class="beyond-grid reveal">
+    <div class="b-card"><span class="b-ico">🎭</span><h4 data-en="Acting & Theatre" data-ar="التمثيل والمسرح">Acting & Theatre</h4><p data-en="Multiple acting and theatre workshops — comfortable on any stage, including the interview one." data-ar="عدة ورش تمثيل ومسرح — مرتاح على أي مسرح، بما فيه مسرح المقابلة.">Multiple acting and theatre workshops — comfortable on any stage, including the interview one.</p></div>
+    <div class="b-card"><span class="b-ico">🎬</span><h4 data-en="Filmmaking & Scripts" data-ar="صناعة الأفلام والسيناريو">Filmmaking & Scripts</h4><p data-en="Script-writing and film-making workshops — narrative instinct applied to AI video generation." data-ar="ورش كتابة السيناريو وصناعة الأفلام — حدس سردي يُطبَّق على توليد فيديوهات الذكاء الاصطناعي.">Script-writing and film-making workshops — narrative instinct applied to AI video generation.</p></div>
+    <div class="b-card"><span class="b-ico">🎵</span><h4 data-en="Music" data-ar="الموسيقى">Music</h4><p data-en="Studying music and playing instruments — pattern recognition trained by melody." data-ar="أدرس الموسيقى وأعزف الآلات — التعرف على الأنماط درّبته الألحان.">Studying music and playing instruments — pattern recognition trained by melody.</p></div>
+    <div class="b-card"><span class="b-ico">⚽</span><h4 data-en="Football — Semi-Pro U20" data-ar="كرة القدم — شبه احترافي">Football — Semi-Pro U20</h4><p data-en="Semi-professional until 2015, plus gymnastics — discipline, teamwork and grace under pressure." data-ar="شبه احترافي حتى 2015، مع الجمباز — انضباط وعمل جماعي ورشاقة تحت الضغط.">Semi-professional until 2015, plus gymnastics — discipline, teamwork and grace under pressure.</p></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <h2 class="reveal" data-en="Let's put your network on <em>the big screen</em>." data-ar="لنعرض شبكتك على <em>الشاشة الكبيرة</em>.">Let's put your network on <em>the big screen</em>.</h2>
+  <div class="contact-row reveal">
+    <a href="mailto:ahmed_199548@hotmail.com">ahmed_199548@hotmail.com</a>
+    <span data-en="Cairo — Sheikh Zayed" data-ar="القاهرة — الشيخ زايد">Cairo — Sheikh Zayed</span>
+    <span>01152917260</span>
+    <a href="https://www.linkedin.com/in/ahmed-ibrahim-48ba401b9" target="_blank" rel="noopener">LinkedIn ↗</a>
+    <a href="Ahmed-Mahrous-CV-OnePager.pdf" target="_blank" rel="noopener" data-en="Download CV (PDF) ↓" data-ar="تحميل السيرة الذاتية ↓">Download CV (PDF) ↓</a>
+    <!-- GITHUB / PORTFOLIO LINKS — add here later -->
+  </div>
+  <p class="copyright" data-en="© 2026 AHMED MAHROUS — DIRECTED BY CURIOSITY" data-ar="© 2026 أحمد محروس — من إخراج الفضول">© 2026 AHMED MAHROUS — DIRECTED BY CURIOSITY</p>
+</footer>
+
+<script>
+/* ============ LANGUAGE TOGGLE ============ */
+(function(){
+  const html=document.documentElement;
+  let lang=localStorage.getItem('cv-lang')||'en';
+  function apply(l){
+    lang=l;localStorage.setItem('cv-lang',l);
+    html.lang=l;html.dir=(l==='ar')?'rtl':'ltr';
+    document.querySelectorAll('[data-en]').forEach(el=>{
+      const t=el.dataset[l];if(t!==undefined)el.innerHTML=t;
+    });
+    document.getElementById('enLabel').classList.toggle('on',l==='en');
+    document.getElementById('arLabel').classList.toggle('on',l==='ar');
+  }
+  document.getElementById('langToggle').addEventListener('click',()=>apply(lang==='en'?'ar':'en'));
+  apply(lang);
+})();
+
+/* ============ SCROLL REVEALS ============ */
+(function(){
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('vis');io.unobserve(e.target)}
+  }),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+
+/* ============ NETWORK TOPOLOGY CANVAS ============ */
+(function(){
+  const cv=document.getElementById('netmap'),ctx=cv.getContext('2d');
+  let W,H,DPR=Math.min(window.devicePixelRatio||1,2);
+  const nodes=[
+    {id:0,label:{en:'Cairo Production House',ar:'كايرو برودكشن هاوس'},sub:{en:'Network × AI · 2026—',ar:'شبكات × ذكاء اصطناعي'},core:true,x:.5,y:.5},
+    {id:1,label:{en:'NBE AL-Ahli Bank',ar:'البنك الأهلي المصري'},sub:{en:'Data Center LAN · 2023—24',ar:'مركز البيانات · 2023—24'},x:.16,y:.24},
+    {id:2,label:{en:'Etegah Marketing',ar:'اتجاه للتسويق'},sub:{en:'Marketing & BD · 2021',ar:'تسويق · 2021'},x:.82,y:.20},
+    {id:3,label:{en:'FunMaker Ent.',ar:'فان ميكر للترفيه'},sub:{en:'Animation Lead · 2015—16',ar:'أنشطة · 2015—16'},x:.14,y:.76},
+    {id:4,label:{en:'MSA University',ar:'جامعة MSA'},sub:{en:'B.Eng · Grade A Project',ar:'بكالوريوس هندسة'},x:.84,y:.74},
+  ];
+  const links=[[0,1],[0,2],[0,3],[0,4],[1,4],[2,4],[3,1]];
+  document.getElementById('linkCount').textContent=links.length;
+  const pulses=[];for(let i=0;i<14;i++)pulses.push({l:Math.floor(Math.random()*links.length),t:Math.random(),s:.0016+Math.random()*.0022});
+  let mouse={x:-999,y:-999};
+  function resize(){
+    const r=cv.getBoundingClientRect();W=r.width;H=r.height;
+    cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);
+  }
+  window.addEventListener('resize',resize);resize();
+  cv.addEventListener('mousemove',e=>{const r=cv.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top;});
+  cv.addEventListener('mouseleave',()=>{mouse.x=-999;mouse.y=-999});
+  function pos(n){return{x:n.x*W,y:n.y*H}}
+  let t0=performance.now();
+  function draw(now){
+    const el=(now-t0)/1000;
+    ctx.clearRect(0,0,W,H);
+    // links
+    links.forEach(([a,b])=>{
+      const A=pos(nodes[a]),B=pos(nodes[b]);
+      ctx.beginPath();ctx.moveTo(A.x,A.y);ctx.lineTo(B.x,B.y);
+      ctx.strokeStyle='rgba(111,167,179,.18)';ctx.lineWidth=1;ctx.stroke();
+    });
+    // pulses
+    pulses.forEach(p=>{
+      p.t+=p.s;if(p.t>1)p.t=0;
+      const [a,b]=links[p.l];const A=pos(nodes[a]),B=pos(nodes[b]);
+      const x=A.x+(B.x-A.x)*p.t,y=A.y+(B.y-A.y)*p.t;
+      ctx.beginPath();ctx.arc(x,y,2.2,0,7);
+      ctx.fillStyle=p.l%2?'rgba(232,151,90,.9)':'rgba(111,167,179,.9)';ctx.fill();
+    });
+    // nodes
+    const ar=document.documentElement.lang==='ar';
+    nodes.forEach(n=>{
+      const P=pos(n);const R=n.core?9+Math.sin(el*2)*1.5:5.5;
+      const dm=Math.hypot(mouse.x-P.x,mouse.y-P.y);
+      const hov=dm<60;
+      // halo
+      ctx.beginPath();ctx.arc(P.x,P.y,R+10,0,7);
+      ctx.fillStyle=n.core?'rgba(232,151,90,.07)':'rgba(111,167,179,.06)';ctx.fill();
+      // ring
+      ctx.beginPath();ctx.arc(P.x,P.y,R+4+Math.sin(el*3+n.id)*1.5,0,7);
+      ctx.strokeStyle=n.core?'rgba(232,151,90,.4)':'rgba(111,167,179,.3)';ctx.lineWidth=1;ctx.stroke();
+      // core
+      ctx.beginPath();ctx.arc(P.x,P.y,R,0,7);
+      ctx.fillStyle=n.core?'#e8975a':(hov?'#d9b26a':'#6fa7b3');ctx.fill();
+      // labels
+      ctx.font=(hov?'600 13px':'500 12px')+" 'Inter',sans-serif";
+      ctx.fillStyle=hov?'#f0e7d8':'rgba(240,231,216,.75)';
+      ctx.textAlign=n.x>.5?'right':'left';ctx.textBaseline='alphabetic';
+      const tx=P.x+(n.x>.5?-14:14),ty=P.y-6;
+      ctx.fillText(ar?n.label.ar:n.label.en,tx,ty);
+      ctx.font="10px 'JetBrains Mono',monospace";
+      ctx.fillStyle='rgba(168,158,141,.6)';
+      ctx.fillText(ar?n.sub.ar:n.sub.en,tx,ty+14);
+    });
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+})();
+
+/* ============ TERMINAL TYPING ============ */
+(function(){
+  const body=document.getElementById('termBody');
+  const ar=document.documentElement.lang==='ar';
+  const script=[
+    {c:'whoami',o:['<span class="ok">ahmed.mahrous</span> — network engineer × AI specialist','<span class="ok">location:</span> Cairo / Sheikh Zayed · <span class="ok">status:</span> open to extraordinary opportunities']},
+    {c:'cat skills.conf',o:['firewall=fortigate(nse4)  lan_wan=ccna  ai=prompt_engineering','gen_video=higgsfield,magnific  dev=python,js,php,sql,gcp']},
+    {c:'sudo deploy career --target big-screen',o:['<span class="ok">[OK]</span> 5 experience nodes connected','<span class="ok">[OK]</span> AI specialist module loaded','<span class="ok">[OK]</span> creative director mode: <span class="ok">ON</span>','<span class="out">deployment complete — scroll down to explore ▼</span>']},
+  ];
+  let si=0,ci=0,phase='type',lineEl=null,outIdx=0;
+  function newPrompt(){
+    lineEl=document.createElement('div');
+    lineEl.innerHTML='<span class="p">ahmed@career:~$ </span><span class="cmd"></span><span class="caret"></span>';
+    body.appendChild(lineEl);
+  }
+  function step(){
+    const s=script[si];
+    if(phase==='type'){
+      if(!lineEl)newPrompt();
+      if(ci<s.c.length){
+        lineEl.querySelector('.cmd').textContent+=s.c[ci++];
+        setTimeout(step,50+Math.random()*70);
+      }else{
+        lineEl.querySelector('.caret').remove();phase='out';outIdx=0;
+        setTimeout(step,420);
+      }
+    }else if(phase==='out'){
+      if(outIdx<s.o.length){
+        const d=document.createElement('div');d.className='out';
+        d.style.opacity='0';d.innerHTML=s.o[outIdx++];
+        body.appendChild(d);requestAnimationFrame(()=>d.style.opacity='1');
+        setTimeout(step,outIdx===s.o.length?900:300);
+      }else{
+        si++;ci=0;
+        if(si<script.length){phase='type';lineEl=null;setTimeout(step,500)}
+        else{
+          const end=document.createElement('div');
+          end.innerHTML='<span class="p">ahmed@career:~$ </span><span class="caret"></span>';
+          body.appendChild(end);
+        }
+      }
+    }
+    body.scrollTop=body.scrollHeight;
+  }
+  new IntersectionObserver((es,io)=>{if(es[0].isIntersecting){io.disconnect();step()}},{threshold:.4})
+    .observe(document.querySelector('.terminal'));
+})();
+
+/* ============ AI CARD SPOTLIGHT ============ */
+document.querySelectorAll('.ai-card').forEach(c=>{
+  c.addEventListener('mousemove',e=>{
+    const r=c.getBoundingClientRect();
+    c.style.setProperty('--mx',(e.clientX-r.left)+'px');
+    c.style.setProperty('--my',(e.clientY-r.top)+'px');
+  });
+});
+</script>
+</body>
+</html>
